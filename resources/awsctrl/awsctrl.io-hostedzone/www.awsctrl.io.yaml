@@ -1,0 +1,15 @@
+apiVersion: route53.awsctrl.io/v1alpha1
+kind: RecordSet
+metadata:
+  name: www-awsctrl-io
+spec:
+  name: "www.awsctrl.io"
+  type: CNAME
+  tTL: "300"
+  resourceRecords:
+  - "awsctrl.netlify.com"
+  hostedZone:
+    kind: hostedZone
+    apiVersion: route53.awsctrl.io/v1alpha1
+    name: awsctrl-io
+    key: ResourceRef 

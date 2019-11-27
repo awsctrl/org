@@ -16,15 +16,16 @@ KUBECONFIG ?= $(PWD)/kubeconfig
 
 # Create kind cluster for testing
 kind-create:
-	kind create cluster --name awsctrl.io --config cluster/kind.yaml
+	kind create cluster --name org.awsctrl.io --config cluster/kind.yaml
 
 # Delete kind cluster for testing
 kind-delete:
-	kind delete cluster --name awsctrl.io
+	kind delete cluster --name org.awsctrl.io
 
 # 
 write-secrets:
-	kubectl apply -k config/
+	kubectl apply -k config/github-controller/
+	kubectl apply -k config/awsctrl/
 
 # Install tools
 install-tools:
@@ -34,16 +35,29 @@ install-tools:
 install-resources:
 	kubectl apply -f resources/ --recursive
 
+# Update all addon manifests
+update-addons: update-github-controller update-awsctrl
+
+# Update AWS Controller manifests
+update-awsctrl:
+	mkdir -p updated-repos/
+	rm -fr updated-repos/awsctrl/
+	git clone https://github.com/awsctrl/manager.git updated-repos/awsctrl/
+	cd updated-repos/awsctrl/ && kustomize build config/default > ../../addons/awsctrl/manager.yaml
+	rm -fr updated-repos/awsctrl/
+
 # Update Github Controller Manifests
 update-github-controller:
+	mkdir -p updated-repos/
 	rm -fr updated-repos/github-controller/
 	git clone https://github.com/christopherhein/github-controller.git updated-repos/github-controller/
 	cd updated-repos/github-controller/ && kustomize build config/default > ../../addons/github-controller/manager.yaml
 	rm -fr updated-repos/github-controller/
+	
 
 # Sync with the awsctrl org
 sync: kind-create install-tools write-secrets install-resources
-	sleep 90
+	sleep 300
 	make kind-delete
 
 # Install tools for building
@@ -52,4 +66,6 @@ install-ci:
 	go install sigs.k8s.io/kustomize/kustomize/v3
 	curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.16.3/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 	mkdir config/secrets/
-	echo ${GITHUB_AUTH_TOKEN} > config/secrets/github-token
+	echo ${GITHUB_AUTH_TOKEN} > config/github-controller/secrets/github-token
+	echo ${AWS_ACCESS_KEY_ID} > config/awsctrl/secrets/aws-access-key-id
+	echo ${AWS_SECRET_ACCESS_KEY} > config/awsctrl/secrets/aws-secret-access-key
