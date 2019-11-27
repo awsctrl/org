@@ -1,0 +1,15 @@
+apiVersion: github.go.hein.dev/v1alpha1
+kind: Repository
+metadata:
+  name: manager
+  namespace: default
+spec:
+  organization: awsctrl
+  description: Production grade Kubernetes controller for managing AWS Services using CRDs
+  homepage: https://awsctrl.io
+  settings:
+    private: false
+    issues: true
+    wiki: false
+    projects: true
+    template: false

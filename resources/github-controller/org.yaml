@@ -1,0 +1,14 @@
+apiVersion: github.go.hein.dev/v1alpha1
+kind: Repository
+metadata:
+  name: org
+  namespace: default
+spec:
+  organization: awsctrl
+  description: Various configurations for managing git, dns, build infra, etc.
+  settings:
+    private: false
+    issues: true
+    wiki: false
+    projects: true
+    template: false

@@ -1,0 +1,59 @@
+= AWS Controller Organization
+:toc: macro
+
+[cols="a,a"]
+|===
+| *Build Status* | *License* 
+| image::https://travis-ci.com/awsctrl/org.svg?branch=master[link="https://travis-ci.com/awsctrl/org"] | image::https://img.shields.io/badge/license-Apache%202.0-blue.svg[link="https://github.com/awsctrl/org/blob/master/LICENSE"]
+|===
+
+This repo contains all the necessary information for organizing and creating 
+repositories and setting up Github teams. This repo uses declarative manifests
+combined with link:https://k8s.io[Kubernetes] and controllers to reconcile that status.
+
+Because this requires Kubernetes to run, you'll need to setup a 
+link:https://sigs.k8s.io/kind[KinD] cluster locally to run the tools, or use
+the link:https:travisci.org[Travis CI] environment which is configured on each
+`master` merge.
+
+toc::[]
+
+== Requirements
+
+* Kubernetes in Docker (KinD) - link:https://github.com/kubernetes-sigs/kind#installation-and-usage[Install Guide]
+* Kubernetes CLI (kubectl) - link:https://kubernetes.io/docs/tasks/tools/install-kubectl/[Install Guide]
+
+== Local Setup
+
+To get set up locally you'll need to follow the instructions below.
+
+=== Create Environment
+
+First we need a Kubernetes Cluster to orchestrate everything from.
+
+.Terminal
+[source,shell]
+----
+export KUBECONFIG=${PWD}/kubeconfig
+make kind-create
+----
+
+=== Install Tool Controllers
+
+We're going to use a controller which allows you to declaratively setup GitHub and constantly reconcile it.
+
+.Terminal
+[source,shell]
+----
+make install-tools write-secrets 
+----
+
+=== Install Resources
+
+Now that we have the tools controllers deployed we can then deploy our resources to manage the state.
+
+.Terminal
+[source,shell]
+----
+make install-resources
+----
