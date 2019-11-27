@@ -6,7 +6,7 @@ metadata:
 spec:
   organization: awsctrl
   description: "AWS Controller website and documentation:"
-  homepage: https://awsctrl.io
+  homepage: "https://awsctrl.io"
   settings:
     private: false
     issues: true
