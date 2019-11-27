@@ -1,12 +1,11 @@
 apiVersion: github.go.hein.dev/v1alpha1
 kind: Repository
 metadata:
-  name: website
+  name: generator
   namespace: default
 spec:
   organization: awsctrl
-  description: "AWS Controller website and documentation"
-  homepage: "https://awsctrl.io"
+  description: "Tool used to generate all the CloudFormation controllers and types.go"
   settings:
     private: false
     issues: true
