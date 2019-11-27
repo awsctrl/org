@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   organization: awsctrl
-  description: AWS Controller website and documentation:
+  description: "AWS Controller website and documentation:"
   homepage: https://awsctrl.io
   settings:
     private: false
