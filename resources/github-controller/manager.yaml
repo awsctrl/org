@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   organization: awsctrl
-  description: "Production grade Kubernetes controller for managing AWS Services using CRDs:"
+  description: "Production grade Kubernetes controller for managing AWS Services using CRDs"
   homepage: "https://awsctrl.io"
   settings:
     private: false
