@@ -16,7 +16,7 @@ KUBECONFIG ?= $(PWD)/kubeconfig
 
 # Create kind cluster for testing
 kind-create:
-	kind create cluster --name org.awsctrl.io --config cluster/kind.yaml
+	kind create cluster --name org.awsctrl.io --config cluster/kind.yaml  -q
 
 # Delete kind cluster for testing
 kind-delete:
