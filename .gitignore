@@ -2,4 +2,5 @@ updated-repos/
 
 kubeconfig
 
-config/secrets/
+config/awsctrl/secrets/
+config/github-controller/secrets/

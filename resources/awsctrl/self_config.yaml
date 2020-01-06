@@ -1,0 +1,13 @@
+apiVersion: self.awsctrl.io/v1alpha1
+kind: Config
+metadata:
+  name: config
+  namespace: awsctrl-io-system
+spec:
+  clusterName: awsctrl
+  aws:
+    defaultRegion: us-west-2
+    supportedRegions:
+    - us-west-2
+    accountID: "591784189070"
+  resources: []

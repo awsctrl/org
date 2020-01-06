@@ -1,0 +1,10 @@
+namespace: awsctrl-io-system
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+- name: awsctrl-aws-credentials
+  files:
+  - secrets/aws-access-key-id
+  - secrets/aws-secret-access-key
