@@ -65,7 +65,8 @@ install-ci:
 	go get sigs.k8s.io/kind@v0.6.0
 	go install sigs.k8s.io/kustomize/kustomize/v3
 	curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.16.3/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-	mkdir config/secrets/
+	mkdir -p config/github-controller/secrets/
+	mkdir -p config/awsctrl/secrets/
 	echo ${GITHUB_AUTH_TOKEN} > config/github-controller/secrets/github-token
 	echo ${AWS_ACCESS_KEY_ID} > config/awsctrl/secrets/aws-access-key-id
 	echo ${AWS_SECRET_ACCESS_KEY} > config/awsctrl/secrets/aws-secret-access-key
